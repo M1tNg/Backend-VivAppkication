@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const config = require("../config");
 const cors = require('cors');
-
+const activitiesRouter = require("../routes/activitiesRoute");
 const bodyParser = require("body-parser");
 
 const mongoose = require("mongoose");
@@ -22,7 +22,7 @@ if (config.isVercel) {
       return next();
     });
 };
-const activitiesRouter = require("../routes/activitiesRoute");
+
 app.use("/activities", activitiesRouter);
 
 module.exports = app;
