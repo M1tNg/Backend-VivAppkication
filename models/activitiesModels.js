@@ -2,12 +2,16 @@ const mongoose = require('mongoose');
 
 
 const activitiesSchema = mongoose.Schema({
-    act_type:{
+    ActType:{
         enum:["Walking","Running","Hiking","Swimming","Riding bicycle"],
         type:String,
         require:true,   
     },
-    duration:{
+    hour:{
+        type:Number,
+        require:true,
+    },
+    minute:{
         type:Number,
         require:true,
     },
@@ -16,7 +20,8 @@ const activitiesSchema = mongoose.Schema({
         require:true,
     },
     description:{
-        type:String
+        type:String,
+        max:100,
     },
 },
 {
