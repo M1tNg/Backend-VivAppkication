@@ -5,7 +5,7 @@ const activitiesController = require('../controller/activitiesController');
 
 const activitiesModels = require('../models/activitiesModels')
 
-activitiesRouter.param("act_id", async (req,res,next,id) => {
+activitiesRouter.param("activityId", async (req,res,next,id) => {
     const Act = await activitiesModels.findById(id);
     if(!Act) {
         return res.status(404).send();
@@ -16,9 +16,9 @@ activitiesRouter.param("act_id", async (req,res,next,id) => {
 }); 
 
 activitiesRouter.get("/", activitiesController.get_allAct);
-activitiesRouter.get("/:act_id", activitiesController.get_soloAct);
-activitiesRouter.post("/", activitiesController.create_Act);
-activitiesRouter.put("/:act_id", activitiesController.edit_Act);
-activitiesRouter.delete("/:act_id", activitiesController.delete_Act);
+activitiesRouter.get("/:activityId", activitiesController.get_soloAct);
+activitiesRouter.post("create", activitiesController.create_Act);
+activitiesRouter.put("/:activityId", activitiesController.edit_Act);
+activitiesRouter.delete("/:activityId", activitiesController.delete_Act);
 
 module.exports = activitiesRouter;
