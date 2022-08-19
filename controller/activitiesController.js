@@ -25,7 +25,7 @@ const create_Act = (req,res,next) => {
 };
 
 const edit_Act = async (req,res,next) => {
-    const {act_type,duration,date,description} = req.body;
+    const {ActType,hour,minute,date,description} = req.body;
 
     if (ActType) req.Act.ActType = ActType;
     if (hour) req.Act.hour = hour;
