@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
-const config = require("./config");
+const config = require("../config");
+const cors = require('cors');
 
 const bodyParser = require("body-parser");
 
@@ -21,7 +22,7 @@ if (config.isVercel) {
       return next();
     });
 };
-const activitiesRouter = require("./routes/activitiesRoute");
+const activitiesRouter = require("../routes/activitiesRoute");
 app.use("/activities", activitiesRouter);
 
 module.exports = app;
