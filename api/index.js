@@ -26,7 +26,7 @@ if (config.isVercel) {
 };
 
 app.use("/activities", activitiesRouter);
-// app.use("/user",userRouter);
+app.use("/user",userRouter);
 
 // free endpoint
 app.get("/free-endpoint", (request, response) => {
