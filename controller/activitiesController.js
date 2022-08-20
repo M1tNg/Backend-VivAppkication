@@ -2,7 +2,7 @@ const activitiesModels = require("../models/activitiesModels");
 
 // ดึง activity มาทั้งหมด
 const get_allAct = async (req,res,next) => {
-    const act = await activities.find().sort({ date: 1 });
+    const act = await activitiesModels.find().sort({ date: 1 });
     if (!act) {
         res.status(404).send('Not found, the resource does not exist')
     }
@@ -11,7 +11,7 @@ const get_allAct = async (req,res,next) => {
 
 // ดึง activity มา 1 อัน
 const get_soloAct = async (req,res,next) => {
-    const Act = await activities.findById(req.params.activityId);
+    const Act = await activitiesModels.findById(req.params.activityId);
     if (!Act) {
         res.status(404).send('Not found, the resource does not exist')
     }
@@ -20,7 +20,7 @@ const get_soloAct = async (req,res,next) => {
 
 // สร้าง activity 
 const create_Act = (req,res,next) => {
-        const newAct = new activities(req.body);
+        const newAct = new activitiesModels(req.body);
         const validateResult = newAct.validateSync();
         if (validateResult) {
             return res.status(400).send('Bad request');
@@ -34,7 +34,7 @@ const create_Act = (req,res,next) => {
 };
 
 const edit_Act = async (req,res,next) => {
-    const Act = await user.activities.findById(req.params.activityId);
+    const Act = await activitiesModels.findById(req.params.activityId);
     if (!Act) {
         res.status(404).send('Not found, the resource does not exist')
     }
@@ -52,7 +52,7 @@ const edit_Act = async (req,res,next) => {
 
 const delete_Act = async (req,res,next) => {
 
-    const Act = await user.activities.findById(req.params.activityId);
+    const Act = await activitiesModels.findById(req.params.activityId);
     if (!Act) {
         res.status(404).send('Not found, the resource does not exist')
     }
