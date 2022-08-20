@@ -1,17 +1,7 @@
 const mongoose = require("mongoose");
 
-const userSchema = mongoose.Schema(
+const activitiesSchema = mongoose.Schema(
   {
-    username: {
-      type: String,
-      require: [true, "please provide username"],
-      unique: [true, "username is exist"],
-    },
-    password: {
-      type: String,
-      required: [true, "Please provide a password!"],
-      unique: false,
-    },
     activities: 
       {
         ActType: {
@@ -49,6 +39,6 @@ const userSchema = mongoose.Schema(
   }
 );
 
-const userModels = mongoose.model("user", userSchema);
+const activitiesModels = mongoose.model("activities", activitiesSchema);
 
-module.exports = userModels;
+module.exports = activitiesModels;

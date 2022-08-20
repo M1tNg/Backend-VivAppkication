@@ -4,7 +4,7 @@ const config = require("../config");
 const cors = require('cors');
 const activitiesRouter = require("../routes/activitiesRoute");
 const bodyParser = require("body-parser");
-const auth = require('../middleware/auth')
+
 
 const mongoose = require("mongoose");
 // const userRouter = require("../routes/userRoute");
@@ -26,16 +26,6 @@ if (config.isVercel) {
 };
 
 app.use("/activities", activitiesRouter);
-app.use("/user",userRouter);
 
-// free endpoint
-app.get("/free-endpoint", (request, response) => {
-  response.json({ message: "You are free to access me anytime" });
-});
-
-// authentication endpoint
-app.get("/auth-endpoint", auth, (request, response) => {
-  response.send({ message: "You are authorized to access me" });
-});
 
 module.exports = app;

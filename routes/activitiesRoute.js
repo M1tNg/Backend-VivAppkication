@@ -3,8 +3,6 @@ const activitiesRouter = express.Router();
 
 const activitiesController = require('../controller/activitiesController');
 
-const userModels = require('../models/userModels')
-
 activitiesRouter.get("/", activitiesController.get_allAct);
 activitiesRouter.get("/:activityId", activitiesController.get_soloAct);
 activitiesRouter.post("/create", activitiesController.create_Act);
