@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-
 const userSchema = mongoose.Schema(
   {
     username: {
@@ -13,29 +12,31 @@ const userSchema = mongoose.Schema(
       required: [true, "Please provide a password!"],
       unique: false,
     },
-    activities: {
-      ActType: {
-        enum: ["Walking", "Running", "Hiking", "Swimming", "Riding bicycle"],
-        type: String,
-        require: true,
+    activities: 
+      {
+        ActType: {
+          enum: ["Walking", "Running", "Hiking", "Swimming", "Riding bicycle"],
+          type: String,
+          require: true,
+        },
+        hour: {
+          type: Number,
+          require: true,
+        },
+        minute: {
+          type: Number,
+          require: true,
+        },
+        date: {
+          type: Date,
+          require: true,
+        },
+        description: {
+          type: String,
+          max: 100,
+        },
       },
-      hour: {
-        type: Number,
-        require: true,
-      },
-      minute: {
-        type: Number,
-        require: true,
-      },
-      date: {
-        type: Date,
-        require: true,
-      },
-      description: {
-        type: String,
-        max: 100,
-      },
-    },
+    
     schedule: {
       title: { type: String, min: 5, max: 200, required: true },
       start: { type: Date, required: true },

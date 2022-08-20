@@ -3,17 +3,7 @@ const activitiesRouter = express.Router();
 
 const activitiesController = require('../controller/activitiesController');
 
-const activitiesModels = require('../models/userModels')
-
-activitiesRouter.param("activityId", async (req,res,next,id) => {
-    const Act = await activitiesModels.findById(id);
-    if(!Act) {
-        return res.status(404).send();
-    };
-
-    req.Act = Act;
-    next();
-}); 
+const userModels = require('../models/userModels')
 
 activitiesRouter.get("/", activitiesController.get_allAct);
 activitiesRouter.get("/:activityId", activitiesController.get_soloAct);
