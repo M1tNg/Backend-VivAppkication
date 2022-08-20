@@ -2,7 +2,7 @@ const activitiesModels = require("../models/activitiesModels");
 
 // ดึง activity มาทั้งหมด
 const get_allAct = async (req,res,next) => {
-    const act = await activitiesModels.find();
+    const act = await activitiesModels.find().sort({ date: 1 });
     res.send(act);
 }
 
