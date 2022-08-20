@@ -34,30 +34,20 @@ const create_Act = (req,res,next) => {
 };
 
 const edit_Act = async (req,res,next) => {
-    const Act = await activitiesModels.findById(req.params.activityId);
+    const Act = await activitiesModels.findByIdAndUpdate(req.params.activityId,req.body);
     if (!Act) {
         res.status(404).send('Not found, the resource does not exist')
     }
-    const {ActType,hour,minute,date,description} = req.body;
-
-    if (ActType) req.Act.ActType = ActType;
-    if (hour) req.Act.hour = hour;
-    if (minute) req.Act.minute = minute;
-    if (date) req.Act.date = date;
-    if (description) req.Act.description = description;
-
-    await req.Act.save();
-    res.send(req.Act);
+    await Act.save();
+    res.send(req.body);
 };
 
 const delete_Act = async (req,res,next) => {
-
-    const Act = await activitiesModels.findById(req.params.activityId);
+    const Act = await activitiesModels.findByIdAndDelete(req.params.activityId );
     if (!Act) {
         res.status(404).send('Not found, the resource does not exist')
     }
-    await req.Act.remove();
-    res.status(204).send();
+    res.status(204).send("Delete an activity");
 };
 
 module.exports = {
