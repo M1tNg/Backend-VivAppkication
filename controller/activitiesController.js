@@ -1,4 +1,4 @@
-const userModels = require("../models/userModels");
+const activitiesModels = require("../models/activitiesModels");
 
 // ดึง activity มาทั้งหมด
 const get_allAct = async (req,res,next) => {
