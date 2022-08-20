@@ -3,7 +3,7 @@ const activitiesRouter = express.Router();
 
 const activitiesController = require('../controller/activitiesController');
 
-const activitiesModels = require('../models/activitiesModels')
+const activitiesModels = require('../models/userModels')
 
 activitiesRouter.param("activityId", async (req,res,next,id) => {
     const Act = await activitiesModels.findById(id);

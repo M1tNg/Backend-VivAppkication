@@ -1,8 +1,8 @@
-const activitiesModels = require("../models/activitiesModels");
+const userModels = require("../models/userModels");
 
 // ดึง activity มาทั้งหมด
 const get_allAct = async (req,res,next) => {
-    const act = await activitiesModels.find().sort({ date: 1 });
+    const act = await userModels.find().sort({ date: 1 });
     if (!act) {
         res.status(404).send('Not found, the resource does not exist')
     }
