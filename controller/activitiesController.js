@@ -34,7 +34,7 @@ const create_Act = (req,res,next) => {
 };
 
 const edit_Act = async (req,res,next) => {
-    const Act = await activitiesModels.findByIdAndUpdate(req.params.activityId,req.body);
+    const Act = await activitiesModels.findByIdAndUpdate(req.params.activityId, req.body);
     if (!Act) {
         res.status(404).send('Not found, the resource does not exist')
     }
