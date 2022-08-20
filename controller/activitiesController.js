@@ -3,6 +3,9 @@ const activitiesModels = require("../models/activitiesModels");
 // ดึง activity มาทั้งหมด
 const get_allAct = async (req,res,next) => {
     const act = await activitiesModels.find().sort({ date: 1 });
+    if (!act) {
+        res.status(404).send('Not found, the resource does not exist')
+    }
     res.send(act);
 }
 
@@ -13,9 +16,11 @@ const get_soloAct = async (req,res,next) => {
 
 // สร้าง activity 
 const create_Act = (req,res,next) => {
-        const newAct = new activitiesModels({
-            ...req.body,
-        });
+        const newAct = new activitiesModels(req.body);
+        const validateResult = newAct.validateSync();
+        if (validateResult) {
+            return res.status(400).send(validateResult);
+        }
         newAct.save((err,doc) => {
             if (err){
                 return res.status(400).send(err);
