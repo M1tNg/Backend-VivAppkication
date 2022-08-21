@@ -26,6 +26,7 @@ if (config.isVercel) {
 };
 
 app.use("/activities", activitiesRouter);
+app.use('/schedule', scheduleRouter);
 
 
 module.exports = app;
