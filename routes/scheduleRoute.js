@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {showSchedule, createSchedule, deleteSchedule} = require('../controllers/scheduleController')
+const {showSchedule, createSchedule, deleteSchedule} = require('../controller/scheduleController')
 
 router.get('/', showSchedule)
 router.post('/create', createSchedule)

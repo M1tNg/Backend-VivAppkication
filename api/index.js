@@ -4,6 +4,7 @@ const config = require("../config");
 const cors = require('cors');
 const activitiesRouter = require("../routes/activitiesRoute");
 const bodyParser = require("body-parser");
+const scheduleRouter = require("../routes/scheduleRoute");
 
 
 const mongoose = require("mongoose");
