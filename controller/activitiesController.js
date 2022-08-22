@@ -88,7 +88,7 @@ const sumWeek = async (req, res) => {
           total_hour:1,
           total_minute: 1,
           total: { $sum: ["$total_minute",{ $multiply: [ "$total_hour", 60 ] }]}}}
-  ]);
+  ]).sort({month:1});
     if (!act) {
       res.status(404).send("Not found, the resource does not exist");
     }
