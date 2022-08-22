@@ -51,7 +51,7 @@ const delete_Act = async (req,res) => {
 };
 
 const sumMonth = async (req, res) => {
-    const data = await activitiesModels.aggregate( 
+    const act = await activitiesModels.aggregate( 
         [
             { $group:
                 { 
@@ -67,10 +67,10 @@ const sumMonth = async (req, res) => {
                 total: { $sum: ["$total_minute",{ $multiply: [ "$total_hour", 60 ] }]}}}
         ]
     )
-    if (!data) {
+    if (!act) {
         res.status(404).send('Not found, the resource does not exist')
     }
-    res.send(data)
+    res.send(act)
 }
 
 module.exports = {
