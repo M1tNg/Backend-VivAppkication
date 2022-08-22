@@ -78,7 +78,7 @@ const sumWeek = async (req, res) => {
     const act = await activitiesModels.aggregate([
       { $group:
           { 
-          _id: {week: { $week: "$date" }, type: "$ActType"},
+          _id: {week: {$floor: {$divide: [{$dayOfMonth: "$date"}, 7]}}, type: "$ActType"},
           total_hour: { $sum: "$hour" },
           total_minute: { $sum: "$minute" },
   
