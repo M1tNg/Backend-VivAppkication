@@ -50,10 +50,34 @@ const delete_Act = async (req,res) => {
     res.status(204).send("Delete an activity");
 };
 
+const sumMonth = async (req, res) => {
+    const data = await ActivityModel.aggregate( 
+        [
+            { $group:
+                { 
+                _id: {month: { $month: "$date" }, type: "$ActType"},
+                total_hour: { $sum: "$hour" },
+                total_minute: { $sum: "$minute" },
+
+            }},
+            { $project: 
+                {_id: 1,
+                total_hour:1,
+                total_minute: 1,
+                total: { $sum: ["$total_minute",{ $multiply: [ "$total_hour", 60 ] }]}}}
+        ]
+    )
+    if (!data) {
+        res.status(404).send('Not found, the resource does not exist')
+    }
+    res.send(data)
+}
+
 module.exports = {
     get_allAct,
     get_soloAct,
     create_Act,
     edit_Act,
     delete_Act,
+    sumMonth,
 };
