@@ -74,6 +74,27 @@ const sumMonth = async (req, res) => {
   res.send(act);
 };
 
+const sumWeek = async (req, res) => {
+    const act = await activitiesModels.aggregate([
+      { $group:
+          { 
+          _id: {week: { $week: "$date" }, type: "$ActType"},
+          total_hour: { $sum: "$hour" },
+          total_minute: { $sum: "$minute" },
+  
+      }},
+      { $project: 
+          {_id: 1,
+          total_hour:1,
+          total_minute: 1,
+          total: { $sum: ["$total_minute",{ $multiply: [ "$total_hour", 60 ] }]}}}
+  ]);
+    if (!act) {
+      res.status(404).send("Not found, the resource does not exist");
+    }
+    res.send(act);
+  };
+
 module.exports = {
   get_allAct,
   get_soloAct,
@@ -81,4 +102,5 @@ module.exports = {
   edit_Act,
   delete_Act,
   sumMonth,
+  sumWeek,
 };
