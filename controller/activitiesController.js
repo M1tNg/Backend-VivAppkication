@@ -51,7 +51,7 @@ const delete_Act = async (req,res) => {
 };
 
 const sumMonth = async (req, res) => {
-    const data = await ActivityModel.aggregate( 
+    const data = await activitiesModels.aggregate( 
         [
             { $group:
                 { 
