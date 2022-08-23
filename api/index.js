@@ -6,7 +6,7 @@ const activitiesRouter = require("../routes/activitiesRoute");
 const bodyParser = require("body-parser");
 const scheduleRouter = require("../routes/scheduleRoute");
 const morgan = require("morgan");
-const userRouter = require('')
+const userRouter = require('../routes/userRoute');
 
 
 const mongoose = require("mongoose");
