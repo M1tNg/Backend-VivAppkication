@@ -5,7 +5,7 @@ const activitiesSchema = mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "User",
+      ref: 'User',
     },
     ActType: {
       enum: ["Walking", "Running", "Hiking", "Swimming", "Riding bicycle"],
