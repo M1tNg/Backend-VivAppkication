@@ -5,11 +5,14 @@ const cors = require('cors');
 const activitiesRouter = require("../routes/activitiesRoute");
 const bodyParser = require("body-parser");
 const scheduleRouter = require("../routes/scheduleRoute");
+const morgan = require("morgan");
+const userRouter = require('')
 
 
 const mongoose = require("mongoose");
 // const userRouter = require("../routes/userRoute");
 
+app.use(morgan("dev"));
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(
@@ -28,6 +31,7 @@ if (config.isVercel) {
 
 app.use("/activities", activitiesRouter);
 app.use("/schedule", scheduleRouter);
+app.use('/users',userRouter);
 
 
 module.exports = app;

@@ -2,27 +2,32 @@ const mongoose = require("mongoose");
 
 const activitiesSchema = mongoose.Schema(
   {
-        ActType: {
-          enum: ["Walking", "Running", "Hiking", "Swimming", "Riding bicycle"],
-          type: String,
-          require: true,
-        },
-        hour: {
-          type: Number,
-          require: true,
-        },
-        minute: {
-          type: Number,
-          require: true,
-        },
-        date: {
-          type: Date,
-          require: true,
-        },
-        description: {
-          type: String,
-          max: 100,
-      },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
+    ActType: {
+      enum: ["Walking", "Running", "Hiking", "Swimming", "Riding bicycle"],
+      type: String,
+      require: true,
+    },
+    hour: {
+      type: Number,
+      require: true,
+    },
+    minute: {
+      type: Number,
+      require: true,
+    },
+    date: {
+      type: Date,
+      require: true,
+    },
+    description: {
+      type: String,
+      max: 100,
+    },
   },
   {
     versionKey: false,
