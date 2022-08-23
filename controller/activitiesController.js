@@ -58,21 +58,25 @@ const delete_Act = async (req, res) => {
 
 const sumMonth = async (req, res) => {
   const user = req.user.id;
-  const act = await activitiesModels.aggregate([
-    { $match: {user: new mongoose.Types.ObjectId(user) }},
-    { $group:
-        { 
-        _id: {month: { $month: "$date" }, type: "$ActType"},
-        total_hour: { $sum: "$hour" },
-        total_minute: { $sum: "$minute" },
+  const act = await activitiesModels.aggregate( 
+        
+    [
+        { $match: {user: new mongoose.Types.ObjectId(user) }},
+        { $group:
+            { 
+            _id: {user: "$user", month: { $month: "$date" }, type: "$ActType"},
+            total_hour: { $sum: "$hour" },
+            total_minute: { $sum: "$minute" },
 
-    }},
-    { $project: 
-        {_id: 1,
-        total_hour:1,
-        total_minute: 1,
-        total: { $sum: ["$total_minute",{ $multiply: [ "$total_hour", 60 ] }]}}}
-]);
+        }},
+        { $project: 
+            {_id: 1,
+            user:1,
+            total_hour:1,
+            total_minute: 1,
+            total: { $sum: ["$total_minute",{ $multiply: [ "$total_hour", 60 ] }]}}}
+    ]
+);
   if (!act) {
     res.status(404).send("Not found, the resource does not exist");
   }
@@ -84,18 +88,19 @@ const sumWeek = async (req, res) => {
     const act = await activitiesModels.aggregate([
       { $match: {user: new mongoose.Types.ObjectId(user) }},
       { $group:
-          { 
-          _id: {week: {$floor: {$divide: [{$dayOfMonth: "$date"}, 7]}}, type: "$ActType"},
+          {
+          _id: {user: "$user",week: {$floor: {$divide: [{$dayOfMonth: "$date"}, 7]}}, type: "$ActType"},
           total_hour: { $sum: "$hour" },
           total_minute: { $sum: "$minute" },
-  
+ 
       }},
-      { $project: 
+      { $project:
           {_id: 1,
+            user:1,
           total_hour:1,
           total_minute: 1,
           total: { $sum: ["$total_minute",{ $multiply: [ "$total_hour", 60 ] }]}}}
-  ]).sort({month:1});
+  ])
     if (!act) {
       res.status(404).send("Not found, the resource does not exist");
     }
