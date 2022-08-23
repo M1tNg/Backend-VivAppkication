@@ -1,4 +1,5 @@
 const activitiesModels = require("../models/activitiesModels");
+const mongoose = require('mongoose');
 
 // ดึง activity มาทั้งหมด
 const get_allAct = async (req, res) => {

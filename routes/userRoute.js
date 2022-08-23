@@ -6,7 +6,7 @@ const { protect } = require("../middleware/jwtMiddleware");
 const {
   registerUser,
   loginUser,
-  getMe,
+  // getMe,
 } = require("../controller/userController");
 
 router.post("/", registerUser);
