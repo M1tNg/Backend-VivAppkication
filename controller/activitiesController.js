@@ -2,7 +2,7 @@ const activitiesModels = require("../models/activitiesModels");
 
 // ดึง activity มาทั้งหมด
 const get_allAct = async (req, res) => {
-  const act = await activitiesModels.find().sort({ date: 1 });
+  const act = await activitiesModels.find({user: req.user.id}).sort({ date: 1 });
   if (!act) {
     res.status(404).send("Not found, the resource does not exist");
   }
@@ -20,29 +20,32 @@ const get_soloAct = async (req, res) => {
 
 // สร้าง activity
 const create_Act = (req, res) => {
-  const newAct = new activitiesModels(req.body);
-  const validateResult = newAct.validateSync();
-  if (validateResult) {
-    return res.status(400).send("Bad request");
-  }
-  newAct.save((err, doc) => {
-    if (err) {
-      return res.status(400).send(err);
+  const act = await activitiesModels.create({
+        user: req.user.id,
+        ActType: req.body.ActType,
+        hour: req.body.hour,
+        minute: req.body.minute,
+        date: req.body.date,
+        description: req.body.description,
+    });
+
+    if (!act) {
+        return res.status(400).send('Bad request')
     }
-    res.status(201).send(doc);
-  });
-};
+    await act.save();
+    res.send(act)
+}
 
 const edit_Act = async (req, res) => {
+  const user = await activitiesModels.findById(req.user.id)
   const Act = await activitiesModels.findByIdAndUpdate(
     req.params.activityId,
-    req.body
+    req.body, {new :true}
   );
   if (!Act) {
     res.status(404).send("Not found, the resource does not exist");
   }
-  await Act.save();
-  res.send(req.body);
+  res.status(200).json(edit_Act);
 };
 
 const delete_Act = async (req, res) => {
@@ -54,7 +57,9 @@ const delete_Act = async (req, res) => {
 };
 
 const sumMonth = async (req, res) => {
+  const user = req.user.id;
   const act = await activitiesModels.aggregate([
+    { $match: {user: new mongoose.Types.ObjectId(user) }},
     { $group:
         { 
         _id: {month: { $month: "$date" }, type: "$ActType"},
@@ -75,7 +80,9 @@ const sumMonth = async (req, res) => {
 };
 
 const sumWeek = async (req, res) => {
+  const user = req.user.id;
     const act = await activitiesModels.aggregate([
+      { $match: {user: new mongoose.Types.ObjectId(user) }},
       { $group:
           { 
           _id: {week: {$floor: {$divide: [{$dayOfMonth: "$date"}, 7]}}, type: "$ActType"},
