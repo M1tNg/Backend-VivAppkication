@@ -19,7 +19,7 @@ const get_soloAct = async (req, res) => {
 };
 
 // สร้าง activity
-const create_Act = (req, res) => {
+const create_Act = async (req, res) => {
   const act = await activitiesModels.create({
         user: req.user.id,
         ActType: req.body.ActType,
