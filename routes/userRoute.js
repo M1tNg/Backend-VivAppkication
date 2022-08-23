@@ -11,7 +11,7 @@ const {
 
 router.post("/", registerUser);
 router.post("/login", loginUser);
-router.get("/me", getMe);
+// router.get("/me", getMe);
 router.use("/me/activities", protect, activitiesRouter);
 router.use("/me/schedule", protect, scheduleRouter);
 

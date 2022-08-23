@@ -13,7 +13,7 @@ const mongoose = require("mongoose");
 
 app.use(morgan("dev"));
 app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: false })); // for parsing application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(
   cors({
     origin: '*',
